@@ -38,9 +38,7 @@ The extension is not in the Zed registry yet, so install it as a dev extension.
    file suffixes conflict.
 4. Make sure Zed's *HTML* extension is installed. It provides the grammar for
    everything outside the Jinja tags.
-5. Check `[grammars.jinja]` in `extension.toml`. While it has a `file://` URL,
-   `repository` must be the path of your own clone.
-6. In Zed, open the command palette and run `zed: install dev extension`, then
+5. In Zed, open the command palette and run `zed: install dev extension`, then
    pick the cloned folder.
 
 After pulling changes or editing the extension, run `zed: extensions`, find
