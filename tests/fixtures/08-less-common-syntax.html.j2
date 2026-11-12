@@ -1,0 +1,30 @@
+{# Valid Jinja that other grammars tend to reject. All of it must be highlighted, #}
+{# and the HTML after each line must be unaffected. #}
+
+{# Block name repeated on the closing tag #}
+{% block content %}<p>body</p>{% endblock content %}
+
+{# call with a dotted macro #}
+{% call forms.table(rows) %}<td>cell</td>{% endcall %}
+
+{# Tuple unpacking in set and for #}
+{% set a, b = 1, 2 %}
+{% for (key, value) in pairs %}<i>{{ key }}</i>{% endfor %}
+
+{# Slices #}
+<p>{{ items[1:3] }} {{ items[::2] }}</p>
+
+{# Star arguments #}
+<p>{{ render(*args, **kwargs) }}</p>
+
+{# Implicit string concatenation, exponent floats, digit separators #}
+<p>{{ "a" "b" }} {{ 1.5e3 }} {{ 1_000 }}</p>
+
+{# Import from a variable #}
+{% from layout_template import button %}
+
+{# Tags added by extensions #}
+{% cache 300 %}<p>cached</p>{% endcache %}
+{% load static %}
+
+<p class="after">{{ still_highlighted }}</p>

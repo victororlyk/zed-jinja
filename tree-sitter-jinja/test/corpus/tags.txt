@@ -1,0 +1,111 @@
+====================
+Output inside an HTML attribute
+====================
+
+<a href="{{ url }}">x</a>
+
+---
+
+(template
+  (content)
+  (output
+    (identifier))
+  (content))
+
+====================
+Whitespace control delimiters
+====================
+
+{{- a -}}{%- if b -%}{%+ endif +%}
+
+---
+
+(template
+  (content)
+  (output
+    (identifier))
+  (statement
+    (tag_name)
+    (identifier))
+  (statement
+    (tag_name))
+  (content))
+
+====================
+Any word is a tag name
+====================
+
+{% cache 300 %}{% endcache %}{% else %}{% if x %}
+
+---
+
+(template
+  (content)
+  (statement
+    (tag_name)
+    (number))
+  (statement
+    (tag_name))
+  (statement
+    (tag_name))
+  (statement
+    (tag_name)
+    (identifier))
+  (content))
+
+====================
+Block name on the closing tag
+====================
+
+{% block content %}x{% endblock content %}
+
+---
+
+(template
+  (content)
+  (statement
+    (tag_name)
+    (identifier))
+  (content)
+  (statement
+    (tag_name)
+    (identifier))
+  (content))
+
+====================
+Empty tags
+====================
+
+{% %}{{ }}
+
+---
+
+(template
+  (content)
+  (statement)
+  (output)
+  (content))
+
+====================
+Comment containing quotes and tags
+====================
+
+{# it's a "quote" {{ x }} {% y %} ##}z
+
+---
+
+(template
+  (content)
+  (comment)
+  (content))
+
+====================
+Braces that do not open a tag are content
+====================
+
+a { b } {x} {
+
+---
+
+(template
+  (content))

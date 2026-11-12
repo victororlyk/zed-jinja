@@ -1,0 +1,25 @@
+id = "jinja"
+name = "Jinja"
+description = "Jinja2 templates: accurate highlighting with HTML injection, and jinja-lsp."
+version = "0.1.0"
+schema_version = 1
+authors = ["Viktor Orlyk"]
+repository = "https://github.com/viktororlyk/zed-jinja"
+
+# The grammar lives in this repository, in tree-sitter-jinja/. Zed fetches
+# `commit` from `repository`, so after changing the grammar, commit it and put
+# that commit's hash here.
+#
+# The file:// URL only works on the machine that has this checkout. Once the
+# repository is on GitHub, replace it with the https URL; the hash stays valid.
+[grammars.jinja]
+repository = "file:///Users/viktororlyk/Developer/zed-jinja"
+commit = "6507b6411bf10fc20857ddc8056eb6e37b839c7b"
+path = "tree-sitter-jinja"
+
+[language_servers.jinja-lsp]
+name = "jinja-lsp"
+languages = ["Jinja"]
+
+[language_servers.jinja-lsp.language_ids]
+"Jinja" = "jinja"

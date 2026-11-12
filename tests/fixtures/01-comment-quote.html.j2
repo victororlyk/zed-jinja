@@ -1,0 +1,13 @@
+{# Upstream bug: a quote inside a comment broke highlighting for the rest of the file. #}
+{# don't break on a lone ' apostrophe #}
+{# or a lone " double quote #}
+{# or a # hash, {{ braces }}, {% tags %} and <b>html</b> #}
+{#
+  multi-line comment with "mixed' quotes
+  spanning lines
+#}
+{#- whitespace-control comment with it's quote -#}
+<p class="after">{{ user.name }}</p>
+{% if user %}
+  <span>still highlighted: {{ "string" }}</span>
+{% endif %}

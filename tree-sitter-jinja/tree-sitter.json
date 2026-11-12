@@ -1,0 +1,23 @@
+{
+  "$schema": "https://tree-sitter.github.io/tree-sitter/assets/schemas/config.schema.json",
+  "grammars": [
+    {
+      "name": "jinja",
+      "camelcase": "Jinja",
+      "scope": "source.jinja",
+      "path": ".",
+      "file-types": ["jinja", "jinja2", "j2"],
+      "injection-regex": "^jinja2?$"
+    }
+  ],
+  "metadata": {
+    "version": "0.1.0",
+    "license": "MIT",
+    "description": "A lenient Jinja grammar for editors",
+    "authors": [
+      {
+        "name": "Viktor Orlyk"
+      }
+    ]
+  }
+}

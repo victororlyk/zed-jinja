@@ -1,0 +1,24 @@
+{# Upstream bug: `if` statement was not recognized. #}
+{% if user %}
+  <p>hello {{ user.name }}</p>
+{% endif %}
+
+{% if user.is_admin and not user.banned %}
+  <p>admin</p>
+{% elif user.age >= 18 or user.verified %}
+  <p>adult</p>
+{% else %}
+  <p>guest</p>
+{% endif %}
+
+{%- if items is defined and items | length > 0 -%}
+  {% for item in items if item.visible %}
+    {{ item.title if item.title else "untitled" }}
+  {% else %}
+    <em>empty</em>
+  {% endfor %}
+{%- endif -%}
+
+{% if x is not none %}{% if y is divisibleby(3) %}nested{% endif %}{% endif %}
+{% if value in [1, 2, 3] %}in list{% endif %}
+{% if not loop.last %},{% endif %}

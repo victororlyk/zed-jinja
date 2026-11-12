@@ -1,0 +1,14 @@
+# Rust
+/target
+
+# Written by Zed when building the dev extension
+/grammars
+/extension.wasm
+*.wasm
+
+# tree-sitter build output
+/tree-sitter-jinja/build
+/tree-sitter-jinja/*.dylib
+/tree-sitter-jinja/*.so
+/tree-sitter-jinja/*.dll
+node_modules

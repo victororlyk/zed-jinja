@@ -1,0 +1,154 @@
+====================
+Output closed by the next tag
+====================
+
+<p>{{ a <b>{{ c }}</b>
+
+---
+
+(template
+  (content)
+  (output
+    (identifier)
+    (operator)
+    (identifier)
+    (operator))
+  (output
+    (identifier))
+  (content))
+
+====================
+Statement closed by the next tag
+====================
+
+{% if a
+<p>{{ b }}</p>
+
+---
+
+(template
+  (content)
+  (statement
+    (tag_name)
+    (identifier)
+    (operator)
+    (identifier)
+    (operator))
+  (output
+    (identifier))
+  (content))
+
+====================
+Tag closed by a comment
+====================
+
+{{ a {# b #}
+
+---
+
+(template
+  (content)
+  (output
+    (identifier))
+  (comment)
+  (content))
+
+====================
+Tag closed by the end of the file
+====================
+
+{{ a
+
+---
+
+(template
+  (content)
+  (output
+    (identifier)))
+
+====================
+Dict closed by the next tag
+====================
+
+{{ {"a": 1
+{{ b }}
+
+---
+
+(template
+  (content)
+  (output
+    (dict
+      (string)
+      (number)))
+  (output
+    (identifier))
+  (content))
+
+====================
+Unclosed brackets
+====================
+
+{{ f( }}{{ [1 }}{{ (a }}
+
+---
+
+(template
+  (content)
+  (output
+    (call
+      (identifier)
+      (arguments)))
+  (output
+    (list
+      (number)))
+  (output
+    (parenthesized
+      (identifier)))
+  (content))
+
+====================
+Stray closing brackets
+====================
+
+{{ ) ] } }}
+
+---
+
+(template
+  (content)
+  (output)
+  (content))
+
+====================
+Unterminated comment
+====================
+
+{# a
+b
+
+---
+
+(template
+  (content)
+  (comment))
+
+====================
+Incomplete filter, test and attribute
+====================
+
+{{ a | }}{{ a is }}{{ a is not }}{{ a. }}
+
+---
+
+(template
+  (content)
+  (output
+    (identifier))
+  (output
+    (identifier))
+  (output
+    (identifier))
+  (output
+    (identifier))
+  (content))

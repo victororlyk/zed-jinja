@@ -1,0 +1,101 @@
+====================
+Raw block
+====================
+
+{% raw %}{{ a }} {% b %} {# c #}{% endraw %}{{ d }}
+
+---
+
+(template
+  (content)
+  (statement
+    (tag_name))
+  (raw_content)
+  (statement
+    (tag_name))
+  (output
+    (identifier))
+  (content))
+
+====================
+Raw block with whitespace control
+====================
+
+{%- raw -%} x {%- endraw -%}
+
+---
+
+(template
+  (content)
+  (statement
+    (tag_name))
+  (raw_content)
+  (statement
+    (tag_name))
+  (content))
+
+====================
+Empty raw block
+====================
+
+{% raw %}{% endraw %}
+
+---
+
+(template
+  (content)
+  (statement
+    (tag_name))
+  (statement
+    (tag_name))
+  (content))
+
+====================
+Raw block without an end
+====================
+
+{% raw %}{{ a }}
+
+---
+
+(template
+  (content)
+  (statement
+    (tag_name))
+  (raw_content))
+
+====================
+raw as a variable
+====================
+
+{% set raw = 1 %}{{ raw }}
+
+---
+
+(template
+  (content)
+  (statement
+    (tag_name)
+    (identifier)
+    (operator)
+    (number))
+  (output
+    (identifier))
+  (content))
+
+====================
+raw with arguments is an ordinary tag
+====================
+
+{% raw x %}{{ a }}
+
+---
+
+(template
+  (content)
+  (statement
+    (tag_name)
+    (identifier))
+  (output
+    (identifier))
+  (content))

@@ -1,0 +1,22 @@
+{# Tags that are still being typed. Each one must end where the next tag starts, #}
+{# so everything below a broken line keeps its highlighting. #}
+
+<p>{{ user.name <b>{{ ok_1 }}</b></p>
+
+{% if user
+<p>{{ ok_2 }}</p>
+{% endif %}
+
+<p>{{ url_for( }} and {{ [1, 2 }} and {{ ok_3 }}</p>
+
+<p>{{ {"key": 1
+{{ ok_4 }}</p>
+
+<p>{{ value | }} {{ value is }} {{ value. }} {{ ok_5 }}</p>
+
+<p>{{ a ) ] } @ $ }} {{ ok_6 }}</p>
+
+{% for item in items %}
+  <li>{{ item }}</li>
+
+<p class="after">{{ ok_7 }}</p>

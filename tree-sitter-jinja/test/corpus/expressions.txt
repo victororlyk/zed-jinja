@@ -1,0 +1,280 @@
+====================
+Filters
+====================
+
+{{ a | b | c(1) }}{{ a|b }}
+
+---
+
+(template
+  (content)
+  (output
+    (identifier)
+    (filter
+      (identifier))
+    (filter
+      (call
+        (identifier)
+        (arguments
+          (number)))))
+  (output
+    (identifier)
+    (filter
+      (identifier)))
+  (content))
+
+====================
+Tests
+====================
+
+{{ a is b }}{{ a is not b }}{{ a is none }}{{ a is c(1) }}
+
+---
+
+(template
+  (content)
+  (output
+    (identifier)
+    (test
+      (identifier)))
+  (output
+    (identifier)
+    (test
+      (identifier)))
+  (output
+    (identifier)
+    (test
+      (none)))
+  (output
+    (identifier)
+    (test
+      (call
+        (identifier)
+        (arguments
+          (number)))))
+  (content))
+
+====================
+Word operators
+====================
+
+{{ a and b or not c in d }}{{ a not in b }}{{ a if b else c }}
+
+---
+
+(template
+  (content)
+  (output
+    (identifier)
+    (identifier)
+    (identifier)
+    (identifier))
+  (output
+    (identifier)
+    (identifier))
+  (output
+    (identifier)
+    (identifier)
+    (identifier))
+  (content))
+
+====================
+Attributes, calls and subscripts
+====================
+
+{{ a.b.c(1).d[0] }}
+
+---
+
+(template
+  (content)
+  (output
+    (identifier)
+    (attribute
+      (identifier))
+    (attribute
+      (call
+        (identifier)
+        (arguments
+          (number))))
+    (attribute
+      (identifier))
+    (list
+      (number)))
+  (content))
+
+====================
+Keyword arguments
+====================
+
+{{ f(a, b=1, c="x") }}
+
+---
+
+(template
+  (content)
+  (output
+    (call
+      (identifier)
+      (arguments
+        (identifier)
+        (keyword_argument
+          (identifier))
+        (number)
+        (keyword_argument
+          (identifier))
+        (string))))
+  (content))
+
+====================
+Assignment outside a call is an operator
+====================
+
+{% set a = 1 %}
+
+---
+
+(template
+  (content)
+  (statement
+    (tag_name)
+    (identifier)
+    (operator)
+    (number))
+  (content))
+
+====================
+Literals
+====================
+
+{{ 1 }}{{ 1.5 }}{{ 1e6 }}{{ 0x1F }}{{ 1_000 }}{{ "a\"b" }}{{ 'a' }}{{ true }}{{ None }}
+
+---
+
+(template
+  (content)
+  (output
+    (number))
+  (output
+    (number))
+  (output
+    (number))
+  (output
+    (number))
+  (output
+    (number))
+  (output
+    (string))
+  (output
+    (string))
+  (output
+    (boolean))
+  (output
+    (none))
+  (content))
+
+====================
+Collections
+====================
+
+{{ [1, (2, 3), {"a": {"b": 4}}] }}
+
+---
+
+(template
+  (content)
+  (output
+    (list
+      (number)
+      (parenthesized
+        (number)
+        (number))
+      (dict
+        (string)
+        (dict
+          (string)
+          (number)))))
+  (content))
+
+====================
+Closing braces of nested dicts are not a delimiter
+====================
+
+{{{"a": {"b": 1}}}}z
+
+---
+
+(template
+  (content)
+  (output
+    (dict
+      (string)
+      (dict
+        (string)
+        (number))))
+  (content))
+
+====================
+Slices and star arguments
+====================
+
+{{ a[1:2] }}{{ f(*a, **b) }}
+
+---
+
+(template
+  (content)
+  (output
+    (identifier)
+    (list
+      (number)
+      (number)))
+  (output
+    (call
+      (identifier)
+      (arguments
+        (operator)
+        (identifier)
+        (operator)
+        (identifier))))
+  (content))
+
+====================
+Dotted call statement
+====================
+
+{% call(row) forms.table(rows) %}
+
+---
+
+(template
+  (content)
+  (statement
+    (tag_name)
+    (parenthesized
+      (identifier))
+    (identifier)
+    (attribute
+      (call
+        (identifier)
+        (arguments
+          (identifier)))))
+  (content))
+
+====================
+Unknown characters
+====================
+
+{{ a @ b ? c }}
+
+---
+
+(template
+  (content)
+  (output
+    (identifier)
+    (unknown)
+    (identifier)
+    (unknown)
+    (identifier))
+  (content))

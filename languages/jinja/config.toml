@@ -1,0 +1,20 @@
+name = "Jinja"
+grammar = "jinja"
+# Deliberately does not claim plain `.html`; map those per project with the
+# `file_types` setting (see README).
+path_suffixes = ["jinja", "jinja2", "j2", "html.j2", "html.jinja"]
+block_comment = ["{# ", " #}"]
+autoclose_before = ";:.,=}])>%#| \n\t\"'"
+brackets = [
+  { start = "{", end = "}", close = true, newline = true },
+  { start = "[", end = "]", close = true, newline = true },
+  { start = "(", end = ")", close = true, newline = true },
+  { start = "\"", end = "\"", close = true, newline = false, not_in = ["string", "comment"] },
+  { start = "'", end = "'", close = true, newline = false, not_in = ["string", "comment"] },
+]
+
+# Statements are flat in the grammar, so block bodies are indented by pattern.
+# A line indents the next one when its last tag opens a block, and a line that
+# starts with a closing or continuing tag moves back out.
+increase_indent_pattern = '^.*\{%[-+]?\s*(?:(?:if|elif|else|for|block|macro|call|filter|with|autoescape|trans|pluralize)\b[^{]*|set\s[^{=]*)%\}[^{]*$'
+decrease_indent_pattern = '^\s*\{%[-+]?\s*(end\w+|elif|else|pluralize)\b'

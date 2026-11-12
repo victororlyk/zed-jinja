@@ -1,0 +1,13 @@
+{# The grammar reads `## ...` as a line comment and `# if ...` as a line statement. #}
+{# Both are off by default in Jinja, so they must stay highlighted as HTML, not as comments. #}
+<a href="##">placeholder link</a> <b>bold after it</b>
+<p>text ## more <i>text</i></p>
+<style>
+  #header { color: red; }
+  # for { color: blue; }
+</style>
+<pre>
+# if this were Markdown it would be a heading
+## and so would this
+</pre>
+<p class="after">{{ still_highlighted }}</p>

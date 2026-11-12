@@ -1,0 +1,11 @@
+{# Upstream bug: `do` keyword was not highlighted. #}
+{% set items = [] %}
+{% do items.append(1) %}
+{% do items.append({"name": "x", "n": 2}) %}
+{%- do navigation.update({'home': '/'}) -%}
+<ul>
+{% for item in items %}
+  {% do seen.add(item) %}
+  <li>{{ item }}</li>
+{% endfor %}
+</ul>

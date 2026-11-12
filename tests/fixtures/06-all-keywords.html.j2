@@ -1,0 +1,43 @@
+{# Kitchen sink: every statement keyword, filters, tests, literals. #}
+{% extends "layout.html" %}
+{% import "forms.html" as forms %}
+{% from "macros.html" import button, card as c with context %}
+{% include ["a.html", "b.html"] ignore missing without context %}
+
+{% macro field(name, value="", type='text') -%}
+  <input type="{{ type }}" name="{{ name }}" value="{{ value | e }}">
+{%- endmacro %}
+
+{% block body required %}
+  {% set total = 0 %}
+  {% set greeting %}Hello <b>{{ name }}</b>{% endset %}
+  {% with a = 1, b = 2.5 %}{{ a + b * 3 // 2 % 5 ** 2 }}{% endwith %}
+
+  {% filter upper %}shout{% endfilter %}
+  {% call(row) forms.table(rows) %}<td>{{ row }}</td>{% endcall %}
+  {% do log.append("x") %}
+  {% autoescape false %}{{ html }}{% endautoescape %}
+
+  {% for k, v in data.items() recursive %}
+    {{ loop.index }}: {{ k ~ "=" ~ v }}
+    {% if loop.first %}{% continue %}{% endif %}
+    {% break %}
+  {% else %}
+    nothing
+  {% endfor %}
+
+  {{ name | default("anon") | title | truncate(20, true) }}
+  {{ items | map(attribute="id") | join(", ") }}
+  {{ 42 }} {{ -7 }} {{ 3.14 }} {{ 0x1F }} {{ 1e6 }} {{ true }} {{ false }} {{ none }}
+  {{ "double \" quoted" }} {{ 'single \' quoted' }}
+  {{ [1, 2, 3] }} {{ (1, 2) }} {{ {"a": 1, 'b': [2]} }}
+  {{ x is defined }} {{ x is not none }} {{ n is even }} {{ n is divisibleby 3 }}
+  {{ a if b else c }} {{ not a and (b or c) }} {{ a in b }} {{ a not in b }}
+  {{ user["name"] }} {{ user.items()[0].name }} {{ _("translate me") }}
+
+  {% raw %}
+    {{ not parsed }} {% nor this %} {# nor this #}
+  {% endraw %}
+{% endblock body %}
+
+{% trans count=n %}one item{% pluralize %}{{ count }} items{% endtrans %}
