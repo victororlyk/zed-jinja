@@ -1,4 +1,4 @@
-# Jinja for Zed
+#Jinja for Zed
 
 Jinja2 template support for the [Zed](https://zed.dev) editor: highlighting
 that keeps working around quotes, comments, attributes and half-typed tags,
